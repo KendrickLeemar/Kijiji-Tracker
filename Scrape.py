@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 results_page = 'https://www.kijiji.ca/b-oakville-halton-region/3ds/k0l1700277?dc=true'
 
 #parse using beautiful soup
-def scrape(results, upper_price):
+def scrape(results):
     page = urlopen(results)
     parsed_page = BeautifulSoup(page, 'html.parser')
 
@@ -27,12 +27,11 @@ def scrape(results, upper_price):
             continue
 
         removed_currency = price[1:]
-        if float(removed_currency) < upper_price:
-            prices.append(removed_currency)
-            url_list.append(link)
+        prices.append(removed_currency)
+        url_list.append(link)
 
     print(prices)
     print(url_list)
 
-scrape(results_page, 100)
+scrape(results_page)
 
